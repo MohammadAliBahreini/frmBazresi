@@ -1,0 +1,642 @@
+/*=============================================
+=            Variables & Resets               =
+=============================================*/
+
+:root {
+  --primary-color: #005baa;
+  --secondary-color: #e6f2ff;
+  --accent-color: #ff6d00;
+  --text-color: #333;
+  --border-color: #b3d1ff;
+  --error-color: #e63946;
+  --success-color: #2a9d8f;
+
+  /* Neumorphism vars */
+  --neumo-bg: #e0e5ec;
+  --neumo-shadow-light: #ffffff;
+  --neumo-shadow-dark: #a7a7a7;
+  --neumo-radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Yekan', 'Segoe UI', Tahoma, Verdana, sans-serif;
+  background-color: var(--neumo-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 20px;
+  direction: rtl;
+}
+
+/*=============================================
+=              Container & Header             =
+=============================================*/
+
+.container {
+  position: relative;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 30px;
+  background: var(--neumo-bg);
+  border-radius: var(--neumo-radius);
+  box-shadow:
+    8px 8px 16px var(--neumo-shadow-dark),
+    -8px -8px 16px var(--neumo-shadow-light);
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 100%; height: 10px;
+  background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+  border-radius: var(--neumo-radius) var(--neumo-radius) 0 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 80px;
+  object-fit: contain;
+}
+
+.header h1 {
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/*=============================================
+=                Form Sections                =
+=============================================*/
+
+.form-section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--neumo-bg);
+  border-radius: var(--neumo-radius);
+  box-shadow:
+    8px 8px 16px var(--neumo-shadow-dark),
+    -8px -8px 16px var(--neumo-shadow-light);
+}
+
+.form-section-title {
+  color: var(--primary-color);
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/*=============================================
+=                Form Controls                =
+=============================================*/
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: var(--neumo-radius);
+  background: var(--neumo-bg);
+  color: var(--text-color);
+  box-shadow:
+    inset 5px 5px 10px var(--neumo-shadow-dark),
+    inset -5px -5px 10px var(--neumo-shadow-light);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  background: var(--neumo-bg);
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light),
+    0 0 0 3px var(--primary-color);
+}
+
+/* Error & Success states */
+.error-message {
+  font-size: 12px;
+  color: var(--error-color);
+  margin-top: 5px;
+  display: none;
+}
+
+.input-group.error input,
+.input-group.error select,
+.input-group.error textarea {
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light),
+    0 0 0 3px var(--error-color);
+}
+
+.input-group.error .error-message {
+  display: block;
+}
+
+.input-group.success input,
+.input-group.success select,
+.input-group.success textarea {
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light),
+    0 0 0 3px var(--success-color);
+}
+
+/* Special inputs */
+#billId,
+#meterSerial {
+  font-size: 16px;
+  padding: 12px 15px;
+}
+
+/*=============================================
+=               Row & Grouping                =
+=============================================*/
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 160px;
+  margin-bottom: 0;
+}
+
+.select-group {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.select-group .form-group {
+  flex: 0 1 auto;
+  margin-bottom: 0;
+}
+
+.select-group select {
+  width: auto;
+  min-width: 80px;
+  max-width: 150px;
+  padding: 8px 10px;
+  font-size: 15px;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+}
+
+/*=============================================
+=               Question Rows                 =
+=============================================*/
+
+.question-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: var(--neumo-radius);
+  background: var(--neumo-bg);
+  box-shadow:
+    5px 5px 10px var(--neumo-shadow-dark),
+    -5px -5px 10px var(--neumo-shadow-light);
+  transition: all 0.3s ease;
+}
+
+.question-row:hover {
+  box-shadow:
+    2px 2px 5px var(--neumo-shadow-dark),
+    -2px -2px 5px var(--neumo-shadow-light);
+}
+
+.question-text {
+  flex: 1;
+  padding-left: 15px;
+  font-size: 15px;
+}
+
+.question-options {
+  display: flex;
+  gap: 15px;
+  width: 150px;
+}
+
+.question-option {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.question-option input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--neumo-bg);
+  box-shadow:
+    3px 3px 6px var(--neumo-shadow-dark),
+    -3px -3px 6px var(--neumo-shadow-light);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.question-option input[type="radio"]:checked {
+  background-color: var(--primary-color);
+  }
+
+.question-option input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  transform: translate(-50%, -50%);
+}
+
+
+.question-option label {
+  margin-right: 5px;
+  font-weight: normal;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+/* Add question button & new input */
+.add-question-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background: #28a745;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: var(--neumo-radius);
+  cursor: pointer;
+  box-shadow:
+    5px 5px 10px var(--neumo-shadow-dark),
+    -5px -5px 10px var(--neumo-shadow-light);
+  transition: background 0.3s;
+}
+
+.add-question-btn:hover {
+  background: #218838;
+}
+
+.new-question-text {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: var(--neumo-radius);
+  background: var(--neumo-bg);
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light);
+  border: none;
+  font-size: 14px;
+}
+
+/*=============================================
+=           Location & Geo Inputs             =
+=============================================*/
+
+.location-input-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.location-input-group .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.location-input-group .btn {
+  margin-bottom: 5px;
+}
+
+#latitude,
+#longitude {
+  width: 12ch;
+  padding: 8px 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/*=============================================
+=             Photo & Notes Section            =
+=============================================*/
+
+.photo-section {
+  margin-top: 15px;
+  padding: 20px;
+  background: var(--neumo-bg);
+  border-radius: var(--neumo-radius);
+  box-shadow:
+    5px 5px 10px var(--neumo-shadow-dark),
+    -5px -5px 10px var(--neumo-shadow-light);
+  border: none;
+}
+
+/*=============================================
+=            Signature Pad & Clear            =
+=============================================*/
+
+.signature-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.signature-box {
+  position: relative;
+  flex: 1;
+  padding: 15px;
+  background: var(--neumo-bg);
+  border-radius: var(--neumo-radius);
+  box-shadow:
+    5px 5px 10px var(--neumo-shadow-dark),
+    -5px -5px 10px var(--neumo-shadow-light);
+  text-align: center;
+}
+
+.signature-label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.signature-canvas {
+  width: 100%;
+  height: 100px;
+  border-radius: var(--neumo-radius);
+  background: #fff;
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light);
+  border: none;
+}
+
+.clear-signature-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--error-color);
+  color: #fff;
+  border: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.clear-signature-btn:hover {
+  background: #cc0000;
+}
+
+.clear-signature-btn[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  margin-top: 5px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/*=============================================
+=                 Buttons                     =
+=============================================*/
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border: none;
+  border-radius: var(--neumo-radius);
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow:
+    5px 5px 10px var(--neumo-shadow-dark),
+    -5px -5px 10px var(--neumo-shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: var(--accent-color);
+  box-shadow:
+    2px 2px 5px var(--neumo-shadow-dark),
+    -2px -2px 5px var(--neumo-shadow-light);
+}
+
+.btn:active {
+  box-shadow:
+    inset 2px 2px 5px var(--neumo-shadow-dark),
+    inset -2px -2px 5px var(--neumo-shadow-light);
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: center;
+}
+
+.btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20);
+    opacity: 0;
+  }
+}
+
+.btn-submit {
+  display: block;
+  width: 200px;
+  margin: 20px auto 0;
+  background: var(--accent-color);
+  font-weight: bold;
+  padding: 12px 24px;
+}
+
+.btn-submit:hover {
+  background: #e66500;
+}
+
+/*=============================================
+=               Debug Panel                   =
+=============================================*/
+
+.debug-panel {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-height: 200px;
+  background: #333;
+  color: #fff;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 10px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.debug-toggle {
+  position: fixed;
+  bottom: 10px; right: 10px;
+  width: 40px; height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow:
+    5px 5px 10px rgba(0,0,0,0.2),
+    -5px -5px 10px rgba(255,255,255,0.7);
+  z-index: 1001;
+}
+
+.log-entry { padding: 5px; border-bottom: 1px solid #555; }
+.log-error { color: #ff6b6b; }
+.log-warn  { color: #feca57; }
+.log-info  { color: #48dbfb; }
+.log-success { color: #1dd1a1; }
+
+/*=============================================
+=              Responsive Styles              =
+=============================================*/
+
+@media (max-width: 768px) {
+  .select-group,
+  .signature-container,
+  .location-input-group,
+  .form-row {
+    flex-direction: column;
+  }
+
+  .question-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .question-options {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .container { padding: 15px; }
+
+  .logo-container { flex-direction: column; gap: 15px; }
+
+  #billId,
+  #meterSerial { width: 100%; }
+
+  .location-input-group .btn { width: 100%; margin-top: 15px; }
+
+  .select-group select { width: 100%; max-width: none; }
+
+  .btn-submit { width: 80%; }
+}

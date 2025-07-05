@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم بازرسی مدیریت مصرف برق</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__); ?>css/persian-datepicker.min.css">
+  <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__); ?>css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-container">
+        <img src="<?php echo plugin_dir_url(__FILE__); ?>images/iran-grid-logo.png" alt="برق منطقه‌ای" class="logo">
+        <img src="<?php echo plugin_dir_url(__FILE__); ?>images/load-management-logo.png" alt="مدیریت بار" class="logo">
+      </div>
+      <h1>فرم بازرسی مدیریت مصرف برق</h1>
+      <p>اداره برق – واحد کنترل بار و مدیریت مصرف انرژی</p>
+    </div>
+
+    <form id="inspectionForm" method="post" enctype="multipart/form-data">
+      <!-- Hidden inputs برای AJAX و nonce -->
+      <input type="hidden" name="action" value="my_inspection_form_save">
+      <input type="hidden" name="inspection_nonce" value="<?php echo wp_create_nonce('my_inspection_form_nonce'); ?>">
+
+      <div class="form-section">
+        <h3 class="form-section-title">اطلاعات پایه</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inspector">نام بازرس:</label>
+            <select id="inspector" name="inspector" required>
+              <option value="">-- انتخاب کنید --</option>
+              <option value="حجت شریفی">حجت شریفی</option>
+              <option value="هادی سالاری">هادی سالاری</option>
+              <option value="حسین سالاری پور">حسین سالاری پور</option>
+              <option value="فرناز قنبری">فرناز قنبری</option>
+              <option value="علی امیری">علی امیری</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tariff">تعرفه:</label>
+            <select id="tariff" name="tariff" required>
+              <option value="">-- انتخاب کنید --</option>
+              <option value="کشاورزی">کشاورزی</option>
+              <option value="خانگی">خانگی</option>
+              <option value="عمومی">عمومی</option>
+              <option value="اداری">اداری</option>
+              <option value="صنعتی">صنعتی</option>
+              <option value="سایر مصارف">سایر مصارف</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="office">امور:</label>
+            <select id="office" name="office" required>
+              <option value="">-- انتخاب کنید --</option>
+              <option value="یک بندرعباس">یک بندرعباس</option>
+              <option value="دو بندرعباس">دو بندرعباس</option>
+              <option value="سه بندرعباس">سه بندرعباس</option>
+              <option value="چهار بندرعباس">چهار بندرعباس</option>
+              <option value="قشم">قشم</option>
+              <option value="هرمز">هرمز</option>
+              <option value="میناب">میناب</option>
+              <option value="سیریک">سیریک</option>
+              <option value="جاسک">جاسک</option>
+              <option value="بندرخمیر">بندرخمیر</option>
+              <option value="بندر لنگه">بندر لنگه</option>
+              <option value="رویدر">رویدر</option>
+              <option value="جناح">جناح</option>
+              <option value="شیبکوه">شیبکوه</option>
+              <option value="پارسیان">پارسیان</option>
+              <option value="رضوان">رضوان</option>
+              <option value="حاجی آباد">حاجی آباد</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="billId">شناسه قبض:</label>
+            <input type="text" id="billId" name="billId" maxlength="13" required placeholder="مثال: 1234567890123">
+          </div>
+
+          <div class="form-group">
+            <label for="meterSerial">سریال کنتور:</label>
+            <input type="text" id="meterSerial" name="meterSerial" maxlength="11" required placeholder="مثال: 12345678901">
+          </div>
+
+          <div class="form-group">
+            <label for="centerName">نام مرکز:</label>
+            <input type="text" id="centerName" name="centerName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="centerActivity">فعالیت مرکز:</label>
+            <input type="text" id="centerActivity" name="centerActivity" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="visitDate">تاریخ بازدید:</label>
+            <input type="text" id="visitDate" name="visitDate" class="persian-datepicker" required placeholder="۱۴۰۳/۰۴/۰۵">
+          </div>
+
+          <div class="form-group">
+            <label for="visitTime">ساعت بازدید:</label>
+            <input type="text" id="visitTime" name="visitTime" required placeholder="14:30">
+          </div>
+
+          <div class="form-group">
+            <label for="previousVisitDate">تاریخ بازدید قبلی:</label>
+            <input type="text" id="previousVisitDate" name="previousVisitDate"  class="persian-datepicker"  placeholder="مثال: ۱۴۰۲/۱۰/۲۰">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="energyManager">نام مسئول مرکز/مدیریت انرژی:</label>
+            <input type="text" id="energyManager" name="energyManager" required>
+          </div>
+          <div class="form-group">
+            <label for="energyManagerPhone">شماره تماس مسئول مرکز:</label>
+            <input type="tel" id="energyManagerPhone" name="energyManagerPhone"
+                   placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹ یا ۰۷۱۳۲۲۲۴۴۴۴"
+                   pattern="^09\d{9}$|^0\d{10}$"
+                   title="شماره تماس باید با 09 یا 0 شروع شود" required>
+          </div>
+        </div>
+
+        <div class="form-row location-row">
+          <div class="form-group address-group">
+            <label for="address">آدرس کامل:</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="latitude">عرض جغرافیایی:</label>
+            <input type="text" id="latitude" name="latitude" placeholder="۰.۱۲۳۴۵۶" readonly required>
+          </div>
+          <div class="form-group">
+            <label for="longitude">طول جغرافیایی:</label>
+            <input type="text" id="longitude" name="longitude" placeholder="۰.۱۲۳۴۵۶" readonly required>
+          </div>
+          <button type="button" class="btn" id="getLocation">دریافت موقعیت مکانی</button>
+        </div>
+      </div>
+
+      <!-- پرسشنامه -->
+      <div class="form-section">
+        <h3 class="form-section-title">پرسشنامه بازرسی</h3>
+        <div id="questionsContainer">
+          <div class="question-row">
+            <div class="question-text">1. مشترک جهت بازدید همکاری می‌نماید؟</div>
+            <div class="question-options">
+              <label><input type="radio" name="q1" value="بله"> بله</label>
+              <label><input type="radio" name="q1" value="خیر"> خیر</label>
+            </div>
+          </div>
+          <div class="question-row">
+               <div class="question-text">2. مرکز دارای مسئول انرژی با حکم می باشد؟</div>
+                       <div class="question-options">
+              <label><input type="radio" name="q2" value="بله"> بله</label>
+              <label><input type="radio" name="q2" value="خیر"> خیر</label>
+            </div>
+          </div>
+          <div class="question-row">
+               <div class="question-text">3. دیزل ژنراتور در مدار قرار می گیرد؟</div>
+            <div class="question-options">
+              <label><input type="radio" name="q3" value="بله"> بله</label>
+              <label><input type="radio" name="q3" value="خیر"> خیر</label>
+            </div>
+          </div>
+          <div class="question-row">
+               <div class="question-text">4. در صورت وجود دیزل ژنراتور، نامه همکاری امضاء شده است؟</div>
+                       <div class="question-options">
+              <label><input type="radio" name="q4" value="بله"> بله</label>
+              <label><input type="radio" name="q4" value="خیر"> خیر</label>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+        <button type="button" id="addQuestionBtn" class="btn add-question-btn">+ افزودن سوال جدید</button>
+      </div>
+
+      <!-- مستندات -->
+      <div class="form-section">
+        <h3 class="form-section-title">توضیحات و مستندات</h3>
+        <div class="form-group">
+          <label for="comments">توضیحات کلی و پیشنهادات:</label>
+          <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="photos">عکس‌های محل بازدید (حداکثر ۵ عکس):</label>
+          <input type="file" id="photos" name="photos[]" multiple accept="image/*">
+        </div>
+        <div class="form-group">
+          <label for="videos">فیلم‌های محل بازدید:</label>
+          <input type="file" id="videos" name="videos[]" multiple accept="video/*">
+        </div>
+      </div>
+
+      <!-- امضاها -->
+      <div class="form-section">
+        <h3 class="form-section-title">امضاها</h3>
+        <div class="signature-container">
+          <div class="signature-box">
+            <div class="signature-label">امضای بازرس</div>
+            <canvas id="inspectorSignature" class="signature-canvas"></canvas>
+            <button type="button" class="clear-signature-btn" id="clearInspectorSignature">پاک کردن</button>
+          </div>
+          <div class="signature-box">
+            <div class="signature-label">امضای مسئول مرکز</div>
+            <canvas id="centerManagerSignature" class="signature-canvas"></canvas>
+            <button type="button" class="clear-signature-btn" id="clearCenterManagerSignature">پاک کردن</button>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-submit">ثبت فرم</button>
+    </form>
+  </div> <!-- پایان container -->
+
+  <!-- پنل دیباگ -->
+  <div class="debug-panel" id="debugPanel" style="display: none;"></div>
+  <button class="debug-toggle" id="debugToggle">🛠</button>
+
+  <!-- بارگذاری اسکریپت‌ها -->
+  <script src="<?php echo plugin_dir_url(__FILE__); ?>js/persian-date.min.js"></script>
+  <script src="<?php echo plugin_dir_url(__FILE__); ?>js/persian-datepicker.min.js"></script>
+  <script src="<?php echo plugin_dir_url(__FILE__); ?>js/signature_pad.umd.min.js"></script>
+
+  <!-- داده AJAX وردپرس برای آدرس دهی -->
+  <script>
+    const myInspectionFormAjax = {
+      ajaxurl: "<?php echo admin_url('admin-ajax.php'); ?>"
+    };
+  </script>
+
+  <!-- اسکریپت اصلی فرم -->
+  <script src="<?php echo plugin_dir_url(__FILE__); ?>js/script.js"></script>
+</body>
+</html>
